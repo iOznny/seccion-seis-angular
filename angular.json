@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "spotify-app"
+    }
+  },
+  "defaultProject": "spotify-app",
+  "cli": {
+    "analytics": false
+  }
 }
