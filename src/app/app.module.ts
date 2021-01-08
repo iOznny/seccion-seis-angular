@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 
+// HTTP.
+import { HttpClientModule } from "@angular/common/http";
+
+// Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
@@ -11,6 +15,9 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 // Routes
 import { ROUTES } from "./app.routes";
 
+// Pipes
+import { NoImagePipe } from './pipes/no-image.pipe';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -18,10 +25,13 @@ import { ROUTES } from "./app.routes";
     HomeComponent,
     SearchComponent,
     ArtistComponent,
-    NavbarComponent
+    NavbarComponent,
+    NoImagePipe,
+    CardComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true})
   ],
   providers: [],
