@@ -1,13 +1,46 @@
-<div class="row">
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="row" *ngIf="!loading">
     <div class="col-2">
-        <img class="rounded mx-auto d-block" [src]="artist.images | noImage" alt="">
+        <img class="img-thumbnail rounded mx-auto d-block" [src]="artist.images | noImage" alt="">
     </div>
 
     <div class="col">
-
+        <h3>{{ artist.name }}</h3>
+        <p>
+            <a [href]="artist.external_urls.spotify" target="_blank">
+                Ir al perfil del Artista
+            </a>
+        </p>
     </div>
 
-    <div class="col-4">
+    <div class="col-4 text-right">
+        <button routerLink="/search" class="btn btn-outline-danger">Regresar</button>
+    </div>
+</div>
 
+<div class="row mt-3">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <th>Foto</th>
+                <th>Album</th>
+                <th>Canción</th>
+                <th>Vista Previo</th>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let topTrack of topTracks">
+                    <td>
+                        <img class="rounded float-start" width="50px" height="50px" [src]="topTrack.album.images | noImage" alt="">
+                    </td>
+                    <td>{{ topTrack.album.name }}</td>
+                    <td>{{ topTrack.name }}</td>
+                    <td>
+                        <iframe [src]="topTrack.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
