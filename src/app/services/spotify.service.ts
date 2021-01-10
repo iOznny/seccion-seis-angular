@@ -15,24 +15,32 @@ export class SpotifyService {
     const url = `https://api.spotify.com/v1/${ query }`;
 
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer BQB73HdaQqchUb6khjD5fCcQgkBl5UuqukfEbeeLrOBsvZIXIaWqmhyBIdGyvAePEPD35-uRRy5_cQkk9h4'
+      'Authorization': 'Bearer BQBOgoqd2h40fEuRsyi6pqkhob765JcDuJuipcddIbyIhReOwG9fBJYqpDDun_s-oz5FO650mERhRhliQJo'
     });
 
     return this.http.get(url, { headers });
   }
 
+  // Obtener nuevos lanzamientos.
   getNewReleases() {
     return this.getQuery('browse/new-releases?limit=30').pipe(map(data => data['albums'].items));
     /*return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers })
     .pipe(map(data => data['albums'].items)); */
   }
 
+  // Obtener los artistas relacionados a la busqueda.
   getArtists(artist: string) {
     return this.getQuery(`search?q=${ artist }&type=artist&limit=30`).pipe(map(data => data['artists'].items));
   }
 
+  // Obtener artista seleccionado.
   getArtist(artist_id: string) {
     return this.getQuery(`artists/${ artist_id }`);
+  }
+
+  // Obtener top tracks del artista.
+  getTopTracks(artist_id: string) {
+    return this.getQuery(`artists/${ artist_id }/top-tracks?market=es`).pipe(map(data => data['tracks']));
   }
 
 }
